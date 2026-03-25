@@ -1189,10 +1189,8 @@ function renderCharts(){
 function notify(msg,type='ok'){const n=document.getElementById('notif');n.textContent=msg;n.className=`notif ${type} show`;setTimeout(()=>n.classList.remove('show'),3000)}
 
 // ===== INIT =====
-window.onload = function() {
-    renderDashboard();
-    populateSegs();
-};
-</script>
-</body>
-</html>
+// Garante que o código só rode após a página carregar totalmente
+window.addEventListener('DOMContentLoaded', () => {
+  renderDashboard();
+  populateSegs();
+});
