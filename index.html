@@ -101,4 +101,598 @@ a{color:var(--accent);text-decoration:none}
 /* FORM */
 .frow{margin-bottom:12px}
 .flabel{font-size:11px;font-weight:500;color:var(--muted);display:block;margin-bottom:5px}
-.finput{background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:var(--fn);font-size:13px;padding:7px 10px;border-radius:var(--r);outline:none;width:100%;transition:
+.finput{background:var(--bg3);border:1px solid var(--border2);color:var(--text);font-family:var(--fn);font-size:13px;padding:7px 10px;border-radius:var(--r);outline:none;width:100%;transition:border-color .15s}
+.finput:focus{border-color:var(--accent)}
+.finput::placeholder{color:var(--subtle)}
+select.finput option{background:var(--bg3)}
+.fcols2{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.fcols3{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px}
+
+/* MODAL */
+.overlay{position:fixed;inset:0;background:rgba(0,0,0,.65);display:none;align-items:center;justify-content:center;z-index:200;padding:20px}
+.overlay.open{display:flex}
+.modal{background:var(--bg2);border:1px solid var(--border2);border-radius:var(--rl);padding:22px;width:100%;max-width:560px;max-height:90vh;overflow-y:auto}
+.modal-lg{max-width:720px}
+.modal-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:18px}
+.modal-title{font-size:15px;font-weight:600}
+.modal-close{background:none;border:none;color:var(--muted);cursor:pointer;font-size:18px;padding:2px 6px;border-radius:4px;font-family:var(--fn)}
+.modal-close:hover{color:var(--text);background:var(--bg3)}
+
+/* PROGRESS */
+.pbar{height:4px;background:var(--bg4);border-radius:2px;overflow:hidden}
+.pfill{height:100%;border-radius:2px;transition:width .5s}
+
+/* AI PANEL */
+#ai-panel{width:360px;min-width:360px;background:var(--bg2);border-left:1px solid var(--border);display:none;flex-direction:column;height:100vh}
+#ai-panel.open{display:flex}
+.ai-head{padding:14px 16px;border-bottom:1px solid var(--border);display:flex;align-items:center;gap:8px}
+.ai-pulse{width:8px;height:8px;background:var(--green);border-radius:50%;animation:pulse 2s infinite}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.3}}
+.ai-msgs{flex:1;overflow-y:auto;padding:14px;display:flex;flex-direction:column;gap:10px}
+.ai-msg{padding:10px 12px;border-radius:var(--r);font-size:13px;line-height:1.6}
+.ai-msg.user{background:rgba(59,130,246,.15);border:1px solid rgba(59,130,246,.2);align-self:flex-end;max-width:88%}
+.ai-msg.bot{background:var(--bg3);border:1px solid var(--border);align-self:flex-start;max-width:95%}
+.ai-quick{padding:0 14px 10px;display:flex;flex-direction:column;gap:5px}
+.ai-q{background:var(--bg3);border:1px solid var(--border);padding:7px 10px;border-radius:var(--r);font-size:11.5px;color:var(--muted);cursor:pointer;text-align:left;transition:all .15s;font-family:var(--fn)}
+.ai-q:hover{border-color:var(--accent);color:var(--text)}
+.ai-input-row{padding:12px;border-top:1px solid var(--border);display:flex;gap:8px}
+
+/* NOTIFY */
+.notif{position:fixed;bottom:20px;right:20px;background:var(--bg2);border:1px solid var(--border2);border-radius:var(--r);padding:12px 16px;font-size:13px;z-index:300;transform:translateY(60px);opacity:0;transition:all .3s;max-width:320px}
+.notif.show{transform:translateY(0);opacity:1}
+.notif.ok{border-left:3px solid var(--green)}
+.notif.err{border-left:3px solid var(--red)}
+.notif.warn{border-left:3px solid var(--amber)}
+
+/* ALERT */
+.alert{border-radius:var(--r);padding:10px 14px;font-size:12.5px;margin-bottom:14px;display:flex;align-items:flex-start;gap:8px}
+.alert-warn{background:rgba(245,158,11,.08);border:1px solid rgba(245,158,11,.2);color:var(--amber)}
+.alert-err{background:rgba(239,68,68,.08);border:1px solid rgba(239,68,68,.2);color:var(--red)}
+.alert-ok{background:rgba(16,185,129,.08);border:1px solid rgba(16,185,129,.2);color:var(--green)}
+.alert-blue{background:rgba(59,130,246,.08);border:1px solid rgba(59,130,246,.2);color:var(--accent)}
+
+/* KANBAN */
+.kanban{display:flex;gap:12px;overflow-x:auto;padding-bottom:8px}
+.kcol{min-width:210px;background:var(--bg3);border:1px solid var(--border);border-radius:var(--rl);padding:12px}
+.kcol-h{font-size:11px;font-weight:600;margin-bottom:10px;display:flex;align-items:center;justify-content:space-between}
+.kcard{background:var(--bg2);border:1px solid var(--border);border-radius:var(--r);padding:9px 11px;margin-bottom:7px;font-size:12px;cursor:pointer;transition:border-color .15s}
+.kcard:hover{border-color:var(--border2)}
+
+/* TABS */
+.tabs{display:flex;border-bottom:1px solid var(--border);margin-bottom:16px}
+.tab{padding:7px 14px;background:none;border:none;color:var(--muted);cursor:pointer;font-size:13px;font-family:var(--fn);border-bottom:2px solid transparent;margin-bottom:-1px;transition:all .15s}
+.tab.active{color:var(--accent);border-bottom-color:var(--accent)}
+.tab:hover{color:var(--text)}
+.tab-pane{display:none}
+.tab-pane.active{display:block}
+
+/* AVATAR */
+.av{width:32px;height:32px;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:12px;font-weight:600;flex-shrink:0}
+.av-j{background:rgba(59,130,246,.15);color:var(--accent)}
+.av-i{background:rgba(139,92,246,.15);color:var(--purple)}
+.av-g{background:rgba(16,185,129,.15);color:var(--green)}
+
+::-webkit-scrollbar{width:5px;height:5px}
+::-webkit-scrollbar-track{background:transparent}
+::-webkit-scrollbar-thumb{background:var(--bg5);border-radius:3px}
+</style>
+</head>
+<body>
+
+<nav id="sidebar">
+  <div class="logo-wrap">
+    <div class="logo-icon">CS</div>
+    <div>
+      <div class="logo-text">CS Hub PLIQ</div>
+      <div class="logo-sub">Customer Success 2026</div>
+    </div>
+  </div>
+  <div style="flex:1;overflow-y:auto;padding:6px 0">
+    <div class="nav-section">Visão Geral</div>
+    <button class="nav-item active" onclick="nav('dashboard',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h5v5H2zm7 0h5v5H9zm-7 7h5v5H2zm7 0h5v5H9"/></svg>Dashboard
+    </button>
+    <button class="nav-item" onclick="nav('alertas',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1a5 5 0 00-5 5v3l-1.5 2.5h13L13 9V6a5 5 0 00-5-5zm0 14a2 2 0 01-2-2h4a2 2 0 01-2 2z"/></svg>Alertas
+      <span class="nav-badge" id="badge-alertas">0</span>
+    </button>
+
+    <div class="nav-section">Clientes</div>
+    <button class="nav-item" onclick="nav('clientes',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 8a3 3 0 100-6 3 3 0 000 6zm-5 5.5a5 5 0 0110 0H3z"/></svg>Base de Clientes
+    </button>
+    <button class="nav-item" onclick="nav('health',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 2l1.6 3.2L13 6.2l-2.5 2.5.6 3.5L8 10.5l-3.1 1.7.6-3.5L3 6.2l3.4-.5z"/></svg>Health Score
+    </button>
+    <button class="nav-item" onclick="nav('interacoes',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M14 2H2a1 1 0 00-1 1v9a1 1 0 001 1h3l3 3 3-3h3a1 1 0 001-1V3a1 1 0 00-1-1z"/></svg>Histórico
+    </button>
+
+    <div class="nav-section">Pipeline</div>
+    <button class="nav-item" onclick="nav('piperun',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M1 3h14v2H1zm2 4h10v2H3zm2 4h6v2H5z"/></svg>Piperun CRM
+    </button>
+    <button class="nav-item" onclick="nav('tarefas',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2 2h12v2H2zm0 5h12v2H2zm0 5h7v2H2z"/></svg>Tarefas
+    </button>
+    <button class="nav-item" onclick="nav('agenda',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M4 1v1H2a1 1 0 00-1 1v11a1 1 0 001 1h12a1 1 0 001-1V3a1 1 0 00-1-1h-2V1h-2v1H6V1H4zm0 5h2v2H4V6zm4 0h2v2H8V6zm4 0h2v2h-2V6zm-8 4h2v2H4v-2zm4 0h2v2H8v-2z"/></svg>Google Agenda
+    </button>
+
+    <div class="nav-section">Gestão</div>
+    <button class="nav-item" onclick="nav('playbooks',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M3 2a1 1 0 011-1h8a1 1 0 011 1v12l-5-2-5 2V2z"/></svg>Playbooks
+    </button>
+    <button class="nav-item" onclick="nav('automacoes',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 1l2 4 4 1-3 3 1 4-4-2-4 2 1-4-3-3 4-1z"/></svg>Automações
+    </button>
+    <button class="nav-item" onclick="nav('analisadores',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M9 3a1 1 0 00-2 0v4H3a1 1 0 000 2h4v4a1 1 0 002 0V9h4a1 1 0 000-2H9V3z"/></svg>Equipe CS
+    </button>
+    <button class="nav-item" onclick="nav('relatorios',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M2 12V4l4 4 3-5 4 6H2z"/></svg>Relatórios
+    </button>
+  </div>
+
+  <div class="sidebar-footer">
+    <button class="nav-item" onclick="nav('config',this)">
+      <svg width="15" height="15" viewBox="0 0 16 16" fill="currentColor"><path d="M8 5a3 3 0 100 6A3 3 0 008 5zm4.9-1.4l1 1.7-1.2 1.1c.1.4.1.9 0 1.2l1.2 1.1-1 1.7-1.5-.5c-.3.3-.7.5-1.1.7L10 12H8l-.3-1.4c-.4-.2-.8-.4-1.1-.7l-1.5.5-1-1.7 1.2-1.1c-.1-.4-.1-.9 0-1.2L4.1 5.3l1-1.7 1.5.5C7 3.8 7.5 3.6 7.9 3.4L8.2 2h2l.3 1.4c.4.2.8.4 1.1.7l1.3-.5z"/></svg>Configurações
+    </button>
+  </div>
+</nav>
+
+<div id="main">
+  <div class="topbar">
+    <span class="topbar-title" id="page-title">Dashboard</span>
+    <div class="pill warn" id="piperun-pill"><div class="dot"></div>Piperun — Configurar</div>
+    <div class="pill" id="gcal-pill" onclick="nav('agenda',null)" style="cursor:pointer"><div class="dot"></div>Google Agenda</div>
+    <div class="pill" id="gmail-pill" style="cursor:pointer" onclick="nav('config',null)"><div class="dot"></div>Gmail</div>
+    <button class="btn btn-ghost btn-sm" onclick="toggleAI()">✦ IA</button>
+    <button class="btn btn-primary btn-sm" onclick="openModal('modalCliente')">+ Cliente</button>
+  </div>
+
+  <div class="content" id="content">
+
+    <div class="view active" id="view-dashboard">
+      <div class="g4">
+        <div class="metric"><div class="metric-lbl">Clientes Ativos</div><div class="metric-val" style="color:var(--accent)" id="m1">97</div><div class="metric-sub" id="m1s">de 103 total</div></div>
+        <div class="metric"><div class="metric-lbl">MRR Total</div><div class="metric-val" style="color:var(--green);font-size:20px" id="m2">R$ 148.8k</div><div class="metric-sub up" id="m2s">Base ativa</div></div>
+        <div class="metric"><div class="metric-lbl">Em Risco / Churn</div><div class="metric-val" style="color:var(--red)" id="m3">4</div><div class="metric-sub down" id="m3s">requer atenção</div></div>
+        <div class="metric"><div class="metric-lbl">Health Score Médio</div><div class="metric-val" style="color:var(--purple)" id="m4">74</div><div class="metric-sub" id="m4s">/100 pts</div></div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-header"><span class="card-title">⚠ Alertas Prioritários</span><button class="btn btn-ghost btn-sm" onclick="nav('alertas',null)">Ver todos →</button></div>
+          <table class="tbl"><thead><tr><th>Cliente</th><th>CSM</th><th>Status</th><th>Risco</th></tr></thead><tbody id="d-alertas"></tbody></table>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">Distribuição por CSM</span></div>
+          <div id="d-csm" style="display:flex;flex-direction:column;gap:10px"></div>
+          <div style="margin-top:16px"><div class="card-title" style="font-size:12px;margin-bottom:10px">Top Segmentos por MRR</div><div id="d-seg" style="display:flex;flex-direction:column;gap:7px"></div></div>
+        </div>
+      </div>
+      <div class="g3">
+        <div class="card"><div class="card-header"><span class="card-title">Status Base</span></div><div id="d-status" style="display:flex;flex-direction:column;gap:7px"></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">MRR por CSM</span></div><div id="d-mrr" style="display:flex;flex-direction:column;gap:8px"></div></div>
+        <div class="card"><div class="card-header"><span class="card-title">Tarefas Pendentes</span><button class="btn btn-primary btn-sm" onclick="openModal('modalTarefa')">+</button></div><div id="d-tarefas" style="display:flex;flex-direction:column;gap:7px"></div></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-alertas">
+      <div class="alert alert-warn" style="margin-bottom:16px">
+        <span>⚠</span><div><strong>Problemas encontrados na base de dados</strong><br>
+        Os itens abaixo foram identificados na análise da planilha importada e precisam de verificação.</div>
+      </div>
+      <div class="g2">
+        <div class="card">
+          <div class="card-header"><span class="card-title" style="color:var(--red)">🔴 Clientes Críticos / Churn</span></div>
+          <div id="a-criticos" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title" style="color:var(--amber)">🟡 Problemas nos Dados da Planilha</span></div>
+          <div id="a-flags" style="display:flex;flex-direction:column;gap:8px"></div>
+        </div>
+      </div>
+      <div class="card">
+        <div class="card-header"><span class="card-title">Todos os Clientes Em Risco</span></div>
+        <div class="tbl-wrap"><table class="tbl"><thead><tr><th>Empresa</th><th>CSM</th><th>Status</th><th>Risco</th><th>MRR em Risco</th><th>Renovação</th><th>Ação</th></tr></thead><tbody id="a-risco-table"></tbody></table></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-clientes">
+      <div style="display:flex;gap:8px;margin-bottom:14px;flex-wrap:wrap;align-items:center">
+        <input class="finput" id="busca" placeholder="Buscar empresa, CNPJ, razão social..." style="width:260px" oninput="renderClientes()">
+        <select class="finput" id="f-seg" style="width:160px" onchange="renderClientes()"><option value="">Todos segmentos</option></select>
+        <select class="finput" id="f-csm" style="width:120px" onchange="renderClientes()"><option value="">Ambos CSMs</option><option>Jonathan</option><option>Iara</option></select>
+        <select class="finput" id="f-st" style="width:120px" onchange="renderClientes()"><option value="">Todos status</option><option>Ativo</option><option>Em Risco</option><option>Churn</option><option>Onboarding</option></select>
+        <select class="finput" id="f-risco" style="width:120px" onchange="renderClientes()"><option value="">Todos riscos</option><option>Baixo</option><option>Alto</option><option>Crítico</option></select>
+        <span style="margin-left:auto;font-size:11px;color:var(--muted)" id="c-count"></span>
+      </div>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>#</th><th>Empresa</th><th>Segmento</th><th>CSM</th><th>Plano</th><th>MRR</th><th>Renovação</th><th>Health</th><th>Status</th><th>Risco</th><th>Próx. Follow-up</th><th>Ações</th></tr></thead>
+        <tbody id="t-clientes"></tbody>
+      </table></div>
+    </div>
+
+    <div class="view" id="view-health">
+      <div class="g4" style="margin-bottom:16px">
+        <div class="metric"><div class="metric-lbl">Crítico (≤40)</div><div class="metric-val" style="color:var(--red)" id="h1">0</div></div>
+        <div class="metric"><div class="metric-lbl">Em Risco (41–60)</div><div class="metric-val" style="color:var(--amber)" id="h2">0</div></div>
+        <div class="metric"><div class="metric-lbl">Saudável (61–80)</div><div class="metric-val" style="color:var(--accent)" id="h3">0</div></div>
+        <div class="metric"><div class="metric-lbl">Champion (81+)</div><div class="metric-val" style="color:var(--green)" id="h4">0</div></div>
+      </div>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Empresa</th><th>CSM</th><th>Health Score</th><th>Status</th><th>Risco Churn</th><th>Plano</th><th>MRR</th><th>Renovação</th></tr></thead>
+        <tbody id="t-health"></tbody>
+      </table></div>
+    </div>
+
+    <div class="view" id="view-interacoes">
+      <div class="card-header"><span class="card-title" style="font-size:14px">Histórico de Interações</span><button class="btn btn-primary btn-sm" onclick="openModal('modalInteracao')">+ Nova Interação</button></div>
+      <div style="margin-top:12px">
+        <div class="tbl-wrap"><table class="tbl">
+          <thead><tr><th>Data</th><th>Empresa</th><th>CS</th><th>Canal</th><th>Tipo</th><th>Assunto</th><th>Sentimento</th><th>Próx. Ação</th></tr></thead>
+          <tbody id="t-interacoes"></tbody>
+        </table></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-piperun">
+      <div class="alert alert-blue" style="margin-bottom:14px">
+        <span>🔗</span><div><strong>Integração Piperun CRM</strong> — Configure seu token em <a href="#" onclick="nav('config',null)">Configurações</a> para sincronizar negócios e contatos automaticamente.</div>
+      </div>
+      <div class="kanban" id="kanban"></div>
+    </div>
+
+    <div class="view" id="view-tarefas">
+      <div style="display:flex;gap:8px;margin-bottom:14px;align-items:center;flex-wrap:wrap">
+        <select class="finput" id="ft-st" style="width:130px" onchange="renderTarefas()"><option value="">Todas</option><option>pendente</option><option>em andamento</option><option>concluída</option></select>
+        <select class="finput" id="ft-tp" style="width:140px" onchange="renderTarefas()"><option value="">Todos tipos</option><option>QBR</option><option>Follow-up</option><option>Onboarding</option><option>Renovação</option><option>Alerta</option></select>
+        <select class="finput" id="ft-csm" style="width:120px" onchange="renderTarefas()"><option value="">Todos CSMs</option><option>Jonathan</option><option>Iara</option></select>
+        <button class="btn btn-primary btn-sm" style="margin-left:auto" onclick="openModal('modalTarefa')">+ Nova Tarefa</button>
+      </div>
+      <div class="tbl-wrap"><table class="tbl">
+        <thead><tr><th>Tarefa</th><th>Cliente</th><th>Tipo</th><th>Responsável</th><th>Vencimento</th><th>Prioridade</th><th>Status</th><th>Ações</th></tr></thead>
+        <tbody id="t-tarefas"></tbody>
+      </table></div>
+    </div>
+
+    <div class="view" id="view-agenda">
+      <div class="g2">
+        <div class="card">
+          <div class="card-header"><span class="card-title">📅 Google Agenda</span><button class="btn btn-primary btn-sm" id="btn-gcal" onclick="connectGCal()">Conectar</button></div>
+          <div id="gcal-area">
+            <div class="alert alert-blue"><span>ℹ</span><div>Configure seu Client ID do Google em Configurações e clique em Conectar para sincronizar sua agenda.</div></div>
+          </div>
+          <div id="gcal-events" style="display:none;margin-top:10px"></div>
+        </div>
+        <div class="card">
+          <div class="card-header"><span class="card-title">📧 Gmail</span><button class="btn btn-primary btn-sm" id="btn-gmail" onclick="connectGmail()">Conectar</button></div>
+          <div id="gmail-area">
+            <div class="alert alert-blue"><span>ℹ</span><div>Conecte sua conta Gmail para enviar e-mails de follow-up e QBR diretamente da plataforma.</div></div>
+          </div>
+        </div>
+      </div>
+      <div class="card" style="margin-top:0">
+        <div class="card-header"><span class="card-title">Criar Evento / E-mail de CS</span></div>
+        <div class="fcols2">
+          <div class="frow"><label class="flabel">Tipo</label>
+            <select class="finput" id="ev-tipo"><option>Reunião QBR</option><option>Follow-up Call</option><option>Onboarding</option><option>Renovação</option><option>Alerta de Churn</option></select>
+          </div>
+          <div class="frow"><label class="flabel">Cliente</label>
+            <select class="finput" id="ev-cliente"></select>
+          </div>
+        </div>
+        <div class="fcols2">
+          <div class="frow"><label class="flabel">Data / Hora</label><input class="finput" id="ev-data" type="datetime-local"></div>
+          <div class="frow"><label class="flabel">Participantes (e-mails)</label><input class="finput" id="ev-emails" placeholder="cliente@empresa.com, csm@pliq.com"></div>
+        </div>
+        <div class="frow"><label class="flabel">Descrição / Pauta</label><textarea class="finput" id="ev-desc" rows="3" placeholder="Pauta da reunião..."></textarea></div>
+        <div style="display:flex;gap:8px;flex-wrap:wrap">
+          <button class="btn btn-primary" onclick="criarEvento()">📅 Criar na Agenda</button>
+          <button class="btn btn-ghost" onclick="enviarEmailEvento()">📧 Enviar E-mail Convite</button>
+          <button class="btn btn-ghost" onclick="gerarPautaIA()">✦ Gerar Pauta com IA</button>
+        </div>
+      </div>
+    </div>
+
+    <div class="view" id="view-playbooks">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><span style="font-size:14px;font-weight:600">Playbooks de CS</span><button class="btn btn-primary btn-sm" onclick="openModal('modalPlaybook')">+ Novo Playbook</button></div>
+      <div class="g3" id="playbooks-grid"></div>
+    </div>
+
+    <div class="view" id="view-automacoes">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><span style="font-size:14px;font-weight:600">Automações</span><button class="btn btn-primary btn-sm" onclick="openModal('modalAuto')">+ Nova Automação</button></div>
+      <div style="display:flex;flex-direction:column;gap:10px" id="autos-list"></div>
+    </div>
+
+    <div class="view" id="view-analisadores">
+      <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px"><span style="font-size:14px;font-weight:600">Equipe de Analistas CS</span><button class="btn btn-primary btn-sm" onclick="openModal('modalCSM')">+ Novo Analista</button></div>
+      <div class="g3" id="csm-grid"></div>
+    </div>
+
+    <div class="view" id="view-relatorios">
+      <div class="g2">
+        <div class="card"><div class="card-header"><span class="card-title">MRR por Segmento</span></div><canvas id="c1" height="200"></canvas></div>
+        <div class="card"><div class="card-header"><span class="card-title">Health Score — Distribuição</span></div><canvas id="c2" height="200"></canvas></div>
+      </div>
+      <div class="g3">
+        <div class="card"><div class="card-header"><span class="card-title">Clientes por CSM</span></div><canvas id="c3" height="180"></canvas></div>
+        <div class="card"><div class="card-header"><span class="card-title">Status da Base</span></div><canvas id="c4" height="180"></canvas></div>
+        <div class="card"><div class="card-header"><span class="card-title">Distribuição de Risco</span></div><canvas id="c5" height="180"></canvas></div>
+      </div>
+    </div>
+
+    <div class="view" id="view-config">
+      <div class="tabs">
+        <button class="tab active" onclick="switchTab(this,'tab-piperun')">🔗 Piperun</button>
+        <button class="tab" onclick="switchTab(this,'tab-google')">🌐 Google</button>
+        <button class="tab" onclick="switchTab(this,'tab-ia')">🤖 IA Claude</button>
+        <button class="tab" onclick="switchTab(this,'tab-geral')">⚙ Geral</button>
+      </div>
+      <div id="tab-piperun" class="tab-pane active">
+        <div class="g2">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Piperun CRM</span></div>
+            <div class="frow"><label class="flabel">API Token</label><input class="finput" type="password" id="cfg-pr-token" placeholder="Seu token de API Piperun"></div>
+            <div class="frow"><label class="flabel">URL da API</label><input class="finput" id="cfg-pr-url" value="https://api.pipe.run/v1"></div>
+            <div class="frow"><label class="flabel">ID do Pipeline de CS</label><input class="finput" id="cfg-pr-pipe" placeholder="Ex: 12345"></div>
+            <div class="frow"><label class="flabel">Sincronização automática</label><select class="finput"><option>A cada 15 minutos</option><option>A cada hora</option><option>Manual</option></select></div>
+            <button class="btn btn-primary" onclick="savePiperun()" style="width:100%">Salvar e Conectar Piperun</button>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Webhooks Piperun</span><button class="btn btn-ghost btn-sm" onclick="addWebhook()">+ Webhook</button></div>
+            <div class="alert alert-blue"><span>ℹ</span><div>Configure webhooks para receber notificações quando um deal mudar de etapa no Piperun.</div></div>
+            <div id="webhooks-list" style="display:flex;flex-direction:column;gap:8px;margin-top:10px"></div>
+          </div>
+        </div>
+      </div>
+      <div id="tab-google" class="tab-pane">
+        <div class="g2">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Google Calendar + Gmail</span></div>
+            <div class="alert alert-blue" style="margin-bottom:14px"><span>ℹ</span><div><strong>Como configurar:</strong><br>1. Acesse <a href="https://console.cloud.google.com" target="_blank">console.cloud.google.com</a><br>2. Crie projeto → Ative APIs Calendar + Gmail<br>3. Crie credenciais OAuth 2.0 (app web)<br>4. Adicione o URL deste site como origem<br>5. Cole o Client ID abaixo</div></div>
+            <div class="frow"><label class="flabel">Google Client ID</label><input class="finput" id="cfg-gclient" placeholder="xxxxx.apps.googleusercontent.com"></div>
+            <div class="frow"><label class="flabel">E-mail remetente padrão (CSM)</label><input class="finput" id="cfg-gmail-from" placeholder="cs@suaempresa.com"></div>
+            <div class="frow"><label class="flabel">Assinatura de e-mail</label><textarea class="finput" id="cfg-gmail-sig" rows="3" placeholder="Att,&#10;Time de Customer Success&#10;PLIQ"></textarea></div>
+            <div style="display:flex;gap:8px">
+              <button class="btn btn-primary" onclick="saveGoogle()" style="flex:1">Salvar</button>
+              <button class="btn btn-ghost" onclick="connectGCal()" style="flex:1">Testar Conexão Google</button>
+            </div>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Templates de E-mail</span><button class="btn btn-ghost btn-sm" onclick="openModal('modalTemplate')">+ Template</button></div>
+            <div id="email-templates" style="display:flex;flex-direction:column;gap:8px"></div>
+          </div>
+        </div>
+      </div>
+      <div id="tab-ia" class="tab-pane">
+        <div class="card" style="max-width:560px">
+          <div class="card-header"><span class="card-title">Claude AI — Anthropic</span></div>
+          <div class="alert alert-blue" style="margin-bottom:14px"><span>ℹ</span><div>A IA usa seus dados reais de clientes para análises, sugestões de ação e geração de pautas de QBR.</div></div>
+          <div class="frow"><label class="flabel">API Key Anthropic</label><input class="finput" type="password" id="cfg-ai-key" placeholder="sk-ant-..."></div>
+          <div class="frow"><label class="flabel">Modelo</label>
+            <select class="finput" id="cfg-ai-model">
+              <option value="claude-sonnet-4-20250514">claude-sonnet-4 (Recomendado)</option>
+              <option value="claude-haiku-4-5-20251001">claude-haiku-4 (Mais rápido)</option>
+            </select>
+          </div>
+          <button class="btn btn-primary" onclick="saveAI()" style="width:100%">Salvar Configuração IA</button>
+        </div>
+      </div>
+      <div id="tab-geral" class="tab-pane">
+        <div class="g2">
+          <div class="card">
+            <div class="card-header"><span class="card-title">Configurações Gerais</span></div>
+            <div class="frow"><label class="flabel">Limite Health Crítico</label><input class="finput" type="number" id="cfg-hc" value="40" style="width:80px;display:inline-block"> <span style="font-size:11px;color:var(--muted);margin-left:6px">pts</span></div>
+            <div class="frow"><label class="flabel">Limite Health Em Risco</label><input class="finput" type="number" id="cfg-hr" value="60" style="width:80px;display:inline-block"> <span style="font-size:11px;color:var(--muted);margin-left:6px">pts</span></div>
+            <div class="frow"><label class="flabel">Moeda</label><select class="finput"><option>BRL (R$)</option><option>USD ($)</option></select></div>
+            <button class="btn btn-primary" onclick="notify('Salvo!','ok')" style="width:100%">Salvar</button>
+          </div>
+          <div class="card">
+            <div class="card-header"><span class="card-title">Resumo da Base Importada</span></div>
+            <div id="cfg-stats" style="display:flex;flex-direction:column;gap:6px"></div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+  </div></div><div id="ai-panel">
+  <div class="ai-head">
+    <div class="ai-pulse"></div>
+    <span style="font-size:13px;font-weight:600">CS Assistant PLIQ</span>
+    <button onclick="toggleAI()" style="margin-left:auto;background:none;border:none;color:var(--muted);cursor:pointer;font-size:16px;padding:2px 6px">✕</button>
+  </div>
+  <div class="ai-msgs" id="ai-msgs">
+    <div class="ai-msg bot">Olá! Tenho acesso aos dados de todos os <strong>103 clientes</strong> da PLIQ. Posso analisar riscos, gerar pautas de QBR, sugerir automações e muito mais. Como posso ajudar?</div>
+  </div>
+  <div class="ai-quick" id="ai-quick">
+    <button class="ai-q" onclick="askAI(this.textContent)">Quais clientes têm maior risco de churn?</button>
+    <button class="ai-q" onclick="askAI(this.textContent)">Gere uma pauta de QBR para PETRONECT</button>
+    <button class="ai-q" onclick="askAI(this.textContent)">Compare a carteira Jonathan vs Iara</button>
+    <button class="ai-q" onclick="askAI(this.textContent)">Quais renovações vencem nos próximos 60 dias?</button>
+  </div>
+  <div class="ai-input-row">
+    <input class="finput" id="ai-input" placeholder="Pergunte sobre seus clientes..." onkeydown="if(event.key==='Enter')sendAI()" style="flex:1">
+    <button class="btn btn-primary btn-sm" onclick="sendAI()">→</button>
+  </div>
+</div>
+
+<div class="overlay" id="modalCliente">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title" id="mc-title">Novo Cliente</span><button class="modal-close" onclick="closeModal('modalCliente')">✕</button></div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Empresa *</label><input class="finput" id="nc-emp" placeholder="Nome da empresa"></div>
+      <div class="frow"><label class="flabel">Razão Social</label><input class="finput" id="nc-razao" placeholder="Razão Social"></div>
+    </div>
+    <div class="fcols3">
+      <div class="frow"><label class="flabel">CNPJ</label><input class="finput" id="nc-cnpj" placeholder="00.000.000/0001-00"></div>
+      <div class="frow"><label class="flabel">Segmento</label>
+        <select class="finput" id="nc-seg"><option>Tecnologia</option><option>Telecomunicação</option><option>Saúde</option><option>Financeiro</option><option>Varejo</option><option>Indústria</option><option>Serviços</option><option>Educação</option><option>Outro</option></select>
+      </div>
+      <div class="frow"><label class="flabel">Sub-segmento</label><input class="finput" id="nc-subseg" placeholder="Ex: SaaS, Telecom..."></div>
+    </div>
+    <div class="fcols3">
+      <div class="frow"><label class="flabel">CSM Responsável</label>
+        <select class="finput" id="nc-csm"><option value="">Selecionar...</option></select>
+      </div>
+      <div class="frow"><label class="flabel">MRR (R$)</label><input class="finput" id="nc-mrr" type="number" placeholder="0,00"></div>
+      <div class="frow"><label class="flabel">Plano</label><input class="finput" id="nc-plano" placeholder="Ex: Enterprise PLIQ"></div>
+    </div>
+    <div class="fcols3">
+      <div class="frow"><label class="flabel">Status</label>
+        <select class="finput" id="nc-status"><option>Ativo</option><option>Onboarding</option><option>Em Risco</option></select>
+      </div>
+      <div class="frow"><label class="flabel">Risco Churn</label>
+        <select class="finput" id="nc-risco"><option>Baixo</option><option>Médio</option><option>Alto</option><option>Crítico</option></select>
+      </div>
+      <div class="frow"><label class="flabel">Data Renovação</label><input class="finput" id="nc-renov" type="date"></div>
+    </div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Contato Principal</label><input class="finput" id="nc-contato" placeholder="Nome do contato"></div>
+      <div class="frow"><label class="flabel">E-mail do Contato</label><input class="finput" id="nc-email" type="email" placeholder="contato@empresa.com"></div>
+    </div>
+    <div class="frow"><label class="flabel">Telefone</label><input class="finput" id="nc-tel" placeholder="(00) 00000-0000" style="width:200px"></div>
+    <div class="frow"><label class="flabel">Observações</label><textarea class="finput" id="nc-obs" rows="2" placeholder="Notas importantes..."></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+      <button class="btn btn-ghost" onclick="closeModal('modalCliente')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarCliente()">Salvar Cliente</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalTarefa">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Nova Tarefa</span><button class="modal-close" onclick="closeModal('modalTarefa')">✕</button></div>
+    <div class="frow"><label class="flabel">Título *</label><input class="finput" id="nt-tit" placeholder="Descrição da tarefa"></div>
+    <div class="fcols3">
+      <div class="frow"><label class="flabel">Tipo</label>
+        <select class="finput" id="nt-tp"><option>Follow-up</option><option>QBR</option><option>Onboarding</option><option>Renovação</option><option>Alerta</option><option>Outro</option></select>
+      </div>
+      <div class="frow"><label class="flabel">Prioridade</label>
+        <select class="finput" id="nt-prio"><option>Alta</option><option>Média</option><option>Baixa</option></select>
+      </div>
+      <div class="frow"><label class="flabel">Responsável</label>
+        <select class="finput" id="nt-resp"><option>Jonathan</option><option>Iara</option></select>
+      </div>
+    </div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Cliente</label><select class="finput" id="nt-cli"><option value="">Sem cliente</option></select></div>
+      <div class="frow"><label class="flabel">Vencimento</label><input class="finput" id="nt-data" type="date"></div>
+    </div>
+    <div class="frow"><label class="flabel">Notas</label><textarea class="finput" id="nt-notas" rows="2" placeholder="Detalhes..."></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+      <button class="btn btn-ghost" onclick="closeModal('modalTarefa')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarTarefa()">Salvar Tarefa</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalCSM">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title" id="mcsm-title">Novo Analista CS</span><button class="modal-close" onclick="closeModal('modalCSM')">✕</button></div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Nome Completo *</label><input class="finput" id="csm-nome" placeholder="Ex: Ana Silva"></div>
+      <div class="frow"><label class="flabel">E-mail *</label><input class="finput" id="csm-email" type="email" placeholder="ana@pliq.com"></div>
+    </div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Cargo</label><input class="finput" id="csm-cargo" placeholder="Ex: Customer Success Manager"></div>
+      <div class="frow"><label class="flabel">Telefone</label><input class="finput" id="csm-tel" placeholder="(00) 00000-0000"></div>
+    </div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Meta MRR Mensal (R$)</label><input class="finput" id="csm-meta-mrr" type="number" placeholder="0"></div>
+      <div class="frow"><label class="flabel">Meta Clientes</label><input class="finput" id="csm-meta-cli" type="number" placeholder="0"></div>
+    </div>
+    <div class="frow"><label class="flabel">Especialidade / Segmentos</label><input class="finput" id="csm-espec" placeholder="Ex: Telecomunicação, SaaS"></div>
+    <div class="frow"><label class="flabel">Observações</label><textarea class="finput" id="csm-obs" rows="2" placeholder="Notas..."></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+      <button class="btn btn-ghost" onclick="closeModal('modalCSM')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarCSM()">Cadastrar Analista</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalInteracao">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Nova Interação</span><button class="modal-close" onclick="closeModal('modalInteracao')">✕</button></div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Cliente *</label><select class="finput" id="ni-cli"><option value="">Selecionar...</option></select></div>
+      <div class="frow"><label class="flabel">Data</label><input class="finput" id="ni-data" type="date"></div>
+    </div>
+    <div class="fcols3">
+      <div class="frow"><label class="flabel">CS</label><select class="finput" id="ni-cs"><option>Jonathan</option><option>Iara</option></select></div>
+      <div class="frow"><label class="flabel">Canal</label><select class="finput" id="ni-canal"><option>E-mail</option><option>WhatsApp</option><option>Reunião</option><option>Telefone</option><option>Google Meet</option></select></div>
+      <div class="frow"><label class="flabel">Tipo</label><select class="finput" id="ni-tipo"><option>Follow-up</option><option>Suporte</option><option>QBR</option><option>Onboarding</option><option>Reunião</option></select></div>
+    </div>
+    <div class="frow"><label class="flabel">Assunto e Resumo *</label><textarea class="finput" id="ni-assunto" rows="3" placeholder="Descreva o que foi tratado..."></textarea></div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Sentimento do Cliente</label>
+        <select class="finput" id="ni-sent"><option>Positivo</option><option>Neutro</option><option>Negativo</option><option>Insatisfeito</option></select>
+      </div>
+      <div class="frow"><label class="flabel">Próxima Ação</label><input class="finput" id="ni-proxacao" placeholder="Ex: Enviar proposta de expansão"></div>
+    </div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+      <button class="btn btn-ghost" onclick="closeModal('modalInteracao')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarInteracao()">Registrar Interação</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalPlaybook">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Novo Playbook</span><button class="modal-close" onclick="closeModal('modalPlaybook')">✕</button></div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Nome *</label><input class="finput" id="pb-nome" placeholder="Ex: Onboarding Telecom"></div>
+      <div class="frow"><label class="flabel">Tipo</label><select class="finput" id="pb-tipo"><option>Onboarding</option><option>QBR</option><option>Churn Risk</option><option>Expansão</option><option>Renovação</option><option>Custom</option></select></div>
+    </div>
+    <div class="frow"><label class="flabel">Passos (um por linha)</label><textarea class="finput" id="pb-passos" rows="5" placeholder="1. Kickoff call com time técnico&#10;2. Enviar credenciais e materiais de acesso&#10;3. Check-in semana 2"></textarea></div>
+    <div class="frow"><label class="flabel">Duração estimada</label><input class="finput" id="pb-dur" placeholder="Ex: 30 dias" style="width:150px"></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+      <button class="btn btn-ghost" onclick="closeModal('modalPlaybook')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarPlaybook()">Criar Playbook</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalAuto">
+  <div class="modal">
+    <div class="modal-head"><span class="modal-title">Nova Automação</span><button class="modal-close" onclick="closeModal('modalAuto')">✕</button></div>
+    <div class="frow"><label class="flabel">Nome *</label><input class="finput" id="au-nome" placeholder="Ex: Alerta Churn Crítico"></div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Gatilho</label>
+        <select class="finput" id="au-gat"><option>Health Score abaixo do limite</option><option>Sem follow-up há X dias</option><option>QBR vencendo em X dias</option><option>Renovação em X dias</option><option>Novo cliente criado</option><option>Deal Piperun mudou de etapa</option><option>NPS negativo recebido</option></select>
+      </div>
+      <div class="frow"><label class="flabel">Ação</label>
+        <select class="finput" id="au-acao"><option>Criar tarefa automática</option><option>Enviar e-mail ao CSM</option><option>Enviar e-mail ao cliente (Gmail)</option><option>Criar evento na agenda (Google)</option><option>Executar Playbook</option><option>Disparar Webhook</option></select>
+      </div>
+    </div>
+    <div class="frow"><label class="flabel">Descrição</label><textarea class="finput" id="au-desc" rows="2" placeholder="Descreva o que esta automação faz..."></textarea></div>
+    <div style="display:flex;align-items:center;gap:8px;margin-bottom:14px"><input type="checkbox" id="au-ativo" checked style="width:auto"><label class="flabel" style="margin:0;font-size:13px;color:var(--text)">Automação ativa</label></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end">
+      <button class="btn btn-ghost" onclick="closeModal('modalAuto')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarAuto()">Criar Automação</button>
+    </div>
+  </div>
+</div>
+
+<div class="overlay" id="modalTemplate">
+  <div class="modal modal-lg">
+    <div class="modal-head"><span class="modal-title">Novo Template de E-mail</span><button class="modal-close" onclick="closeModal('modalTemplate')">✕</button></div>
+    <div class="fcols2">
+      <div class="frow"><label class="flabel">Nome do Template</label><input class="finput" id="tpl-nome" placeholder="Ex: Follow-up 30 dias"></div>
+      <div class="frow"><label class="flabel">Tipo</label><select class="finput" id="tpl-tipo"><option>Follow-up</option><option>QBR</option><option>Onboarding</option><option>Renovação</option><option>Alerta de Risco</option></select></div>
+    </div>
+    <div class="frow"><label class="flabel">Assunto</label><input class="finput" id="tpl-assunto" placeholder="Assunto do e-mail..."></div>
+    <div class="frow"><label class="flabel">Corpo do E-mail</label><textarea class="finput" id="tpl-corpo" rows="6" placeholder="Use {cliente}, {csm}, {data} como variáveis..."></textarea></div>
+    <div style="display:flex;gap:8px;justify-content:flex-end;margin-top:14px">
+      <button class="btn btn-ghost" onclick="closeModal('modalTemplate')">Cancelar</button>
+      <button class="btn btn-primary" onclick="salvarTemplate()">Salvar Template</button>
+    </div>
+  </div>
+</div>
+
+<div class="notif" id="notif"></div>
+
+<script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/4.4.1/chart.umd.js"></script>
+<script>
+const RAW_CLIENTES = [{"id": 1, "empresa": "CONECTA FIBRA", "razao": "CONECTA FIBRA LTDA", "cnpj": "07.314.935/0001-91", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 2797.0, "renovacao": "2026-06-22", "status": "Em Risco", "risco": "Alto", "onboarding": "Concluído", "prox_followup": "2026-03-15", "obs": "", "health": 48, "health_status": "risco", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 2, "empresa": "AMO DIGITAL", "razao": "AMO SERVICOS DIGITAIS LIMITADA", "cnpj": "48.377.126/0001-06", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 3297.0, "renovacao": "2026-06-15", "status": "Em Risco", "risco": "Crítico", "onboarding": "Concluído", "prox_followup": "2026-03-20", "obs": "", "health": 28, "health_status": "critico", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 3, "empresa": "APOSTA GANHA", "razao": "APOSTA GANHA LOTERIAS LTDA", "cnpj": "56.001.749/0001-08", "segmento": "Entretenimento", "subsegmento": "Apostas", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 4000.1, "renovacao": "2026-06-10", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-03-25", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 4, "empresa": "ADAFLOW", "razao": "ADAFLOW TECNOLOGIA LTDA", "cnpj": "40.816.328/0001-03", "segmento": "Tecnologia", "subsegmento": "SaaS", "csm": "Jonathan", "plano": "Básico (PLIQ) - Mensal", "mrr": 297.0, "renovacao": "20/08/2026", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-04-06", "obs": "Cliente so deixar nessa data", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 5, "empresa": "Preâmbulo Tech", "razao": "PREAMBULO INFORMATICA S.A.", "cnpj": "81.053.092/0001-70", "segmento": "Tecnologia", "subsegmento": "Software", "csm": "Jonathan", "plano": "Basic (PLIQ) - Mensal", "mrr": 199.0, "renovacao": "2026-05-30", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-04-10", "obs": "Cliente so deixar nessa data", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 6, "empresa": "APOTIGUAR", "razao": "BRASIL ATACADO LTDA", "cnpj": "46.660.898/0001-25", "segmento": "Varejo", "subsegmento": "Atacado", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 1300.12, "renovacao": "⚠ 15/03/2045 (verificar)", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-03-02", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": ["data_renovacao_invalida"]}, {"id": 7, "empresa": "Mobilar Eletro", "razao": "SUPERMERCADO SANCLER LTDA", "cnpj": "07.356.464/0001-84", "segmento": "Varejo", "subsegmento": "Eletro", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 653.71, "renovacao": "⚠ 15/03/2045 (verificar)", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-04-02", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": ["data_renovacao_invalida"]}, {"id": 8, "empresa": "PETRONECT", "razao": "PROCUREMENT NEGOCIOS ELETRONICOS S/A", "cnpj": "05.370.858/0001-61", "segmento": "Suprimentos", "subsegmento": "B2B", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 4097.0, "renovacao": "2027-11-30", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-04-01", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 9, "empresa": "TRIXNET TECNOLOGIA", "razao": "TRIXNET TECNOLOGIA LTDA", "cnpj": "50.050.545/0001-80", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 2038.0, "renovacao": "2026-08-06", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 10, "empresa": "SEJA FINANCE", "razao": "FINANCE SOLUCOES FINANCEIRAS LTDA", "cnpj": "42.754.587/0001-74", "segmento": "Tecnologia", "subsegmento": "Fintech", "csm": "Jonathan", "plano": "Basic (PLIQ) - Mensal", "mrr": 297.0, "renovacao": "2026-08-10", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 11, "empresa": "GOLDEN TECHNOLOGIA", "razao": "GOLDEN TECHNOLOGIA LTDA", "cnpj": "09.558.104/0001-90", "segmento": "Tecnologia", "subsegmento": "TI", "csm": "Jonathan", "plano": "Advanced (PLIQ) - Mensal", "mrr": 312.36, "renovacao": "2026-10-02", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 12, "empresa": "GRENDENE S A", "razao": "GRENDENE S A", "cnpj": "89.850.341/0001-60", "segmento": "Indústria (Calçados)", "subsegmento": "Calçados", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 2529.52, "renovacao": "2026-06-30", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 13, "empresa": "AGILITY TELECOM", "razao": "INFORARTS SERVICOS DE TELECOMUNICACOES LTDA", "cnpj": "07.195.756/0001-82", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 1081.18, "renovacao": "⚠ 31/03/2045 (verificar)", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": ["data_renovacao_invalida"]}, {"id": 14, "empresa": "Converger Palestras", "razao": "LUIZ FILIPE FARIA PAES 18208299790", "cnpj": "34.949.950/0001-89", "segmento": "Treinamento", "subsegmento": "Eventos", "csm": "Jonathan", "plano": "Light (PLIQ) - Mensal", "mrr": 104.27, "renovacao": "2026-07-29", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 15, "empresa": "KLUBER LUBRICATION LUBRIFICANTES ESPECIAIS LTDA", "razao": "KLUBER LUBRICATION LUBRIFICANTES ESPECIAIS LTDA", "cnpj": "43.054.261/0001-05", "segmento": "Indústria Química", "subsegmento": "Lubrificantes", "csm": "Jonathan", "plano": "Advanced (PLIQ) - Mensal", "mrr": 447.0, "renovacao": "2026-08-22", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 16, "empresa": "ARROBA BANDA LARGA", "razao": "ARROBA BANDA LARGA LTDA", "cnpj": "12.458.616/0001-90", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 1706.0, "renovacao": "2026-07-20", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 17, "empresa": "RAIMAX INTERNET", "razao": "RAIMAX INTERNET LTDA.", "cnpj": "08.804.735/0001-80", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 2293.47, "renovacao": "2026-08-20", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 18, "empresa": "EQUATORIAL", "razao": "EQUATORIAL TELECOMUNICACOES S.A.", "cnpj": "10.995.526/0001-02", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 918.5, "renovacao": "2026-11-10", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 19, "empresa": "ALUGA MAIS", "razao": "ALUGA MAIS APP LTDA", "cnpj": "41.355.046/0001-00", "segmento": "Serviços", "subsegmento": "Locação", "csm": "Jonathan", "plano": "Básico (PLIQ) - Mensal", "mrr": 199.0, "renovacao": "2026-05-10", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 20, "empresa": "CONTRASTE RADIOLOGIA", "razao": "CONTRASTE RADIOLOGIA ODONTOLOGICA", "cnpj": "41.837.747/0001-86", "segmento": "Saúde", "subsegmento": "Odonto", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 138.17, "renovacao": "2026-05-15", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-03-16", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 21, "empresa": "INTERATIVA TECNOLOGIA E COMUNICACAO", "razao": "INTERATIVA TECNOLOGIA E COMUNICACAO LTDA", "cnpj": "29.867.312/0001-89", "segmento": "Tecnologia", "subsegmento": "TI", "csm": "Jonathan", "plano": "Basic (PLIQ) - Mensal", "mrr": 297.0, "renovacao": "2026-05-25", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 22, "empresa": "CREDIPRONTO", "razao": "OLIMPIA PROMOCAO E SERVICOS S.A.", "cnpj": "10.347.366/0001-95", "segmento": "Financeiro", "subsegmento": "Crédito", "csm": "Jonathan", "plano": "Advanced (PLIQ) - Mensal", "mrr": 427.0, "renovacao": "2026-05-25", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 23, "empresa": "UNONET", "razao": "UNONET TELECOMUNICACOES LTDA", "cnpj": "10.313.079/0001-64", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 627.0, "renovacao": "2026-05-15", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 24, "empresa": "VEXNET", "razao": "VEXNET SERVICOS DE TELECOMUNICACOES LTDA", "cnpj": "63.731.361/0001-28", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 2346.0, "renovacao": "2026-05-15", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 25, "empresa": "VEX TELECOM - SINAL DE QUALIDADE", "razao": "VEX TELECOM SERVICOS DE TELECOMUNICACAO LTDA", "cnpj": "07.943.415/0001-48", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise 2025 (PLIQ) - Mensal", "mrr": 1137.5, "renovacao": "2026-05-25", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 26, "empresa": "AceleraVet", "razao": "EVOLUTION BUSINESS LTDA", "cnpj": "44.466.173/0001-75", "segmento": "Consultoria Veterinária", "subsegmento": "Gestão/Treino", "csm": "Jonathan", "plano": "Basic (PLIQ) - Mensal", "mrr": 297.0, "renovacao": "2026-01-09", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 27, "empresa": "BOAVISTA TECNOLOGIA", "razao": "BOAVISTA TECNOLOGIA LTDA", "cnpj": "02.194.338/0001-57", "segmento": "Tecnologia", "subsegmento": "Crédito/Dados", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 1200.0, "renovacao": "2026-01-25", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 28, "empresa": "MASTER INTERNET", "razao": "CSC GESTAO INTEGRADA S/A", "cnpj": "38.323.227/0001-40", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 957.0, "renovacao": "2026-02-08", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 29, "empresa": "UNECONT", "razao": "UNECONT TECNOLOGIA E GESTAO INTEGRADA LTDA", "cnpj": "32.454.943/0001-80", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 597.0, "renovacao": "2026-02-15", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 30, "empresa": "BSPAR", "razao": "BSPAR INCORPORACOES LTDA", "cnpj": "09.365.538/0001-74", "segmento": "Imobiliário", "subsegmento": "Construtura", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 657.0, "renovacao": "2026-02-20", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 31, "empresa": "ERBS ENERGIA", "razao": "ENERGIA ERBS INDUSTRIA E TRANSPORTE LTDA", "cnpj": "17.645.625/0001-03", "segmento": "Indústria", "subsegmento": "Energia", "csm": "Jonathan", "plano": "Basic (PLIQ) - Mensal", "mrr": 297.0, "renovacao": "2026-02-28", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 32, "empresa": "JOSYMIX", "razao": "S. DOS SANTOS SILVA DISTRIBUIDORA", "cnpj": "22.665.596/0001-81", "segmento": "Varejo", "subsegmento": "Distribuição", "csm": "Jonathan", "plano": "Basic (PLIQ) - Mensal", "mrr": 418.0, "renovacao": "2026-03-13", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 33, "empresa": "SEIDOR", "razao": "SEIDOR - TECNOLOGIA DA INFORMACAO LTDA.", "cnpj": "06.179.861/0001-65", "segmento": "Tecnologia", "subsegmento": "ERP/Consultoria", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 1217.0, "renovacao": "2026-03-25", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 34, "empresa": "FRASANET", "razao": "FRASANET PROVEDORES DE INTERNET E COMERCIO DE INFORMATICA LTDA", "cnpj": "13.028.096/0001-48", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 747.54, "renovacao": "2026-02-20", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 35, "empresa": "LLOYD IMOBILIARIO LTDA", "razao": "LLOYD IMOBILIARIO LTDA", "cnpj": "60.583.630/0001-68", "segmento": "Imobiliário", "subsegmento": "Gestão Imóveis", "csm": "Jonathan", "plano": "Intermediário (PLIQ) - Mensal", "mrr": 597.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 36, "empresa": "PLANNEA SOLUCOES CONTABEIS", "razao": "PLANNEA SOLUCOES CONTABEIS LTDA", "cnpj": "59.311.677/0001-93", "segmento": "Contabilidade", "subsegmento": "Soluções Contábeis", "csm": "Jonathan", "plano": "Basic (PLIQ) - Mensal", "mrr": 199.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 37, "empresa": "CASA PILAO", "razao": "GOSTO DE CAFE COMERCIO DE ALIMENTOS E BEBIDAS LTDA", "cnpj": "29.310.747/0001-28", "segmento": "Varejo", "subsegmento": "Alimentação", "csm": "Jonathan", "plano": "Básico (PLIQ) - Mensal", "mrr": 150.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 38, "empresa": "NTSEC - NETWORK SECURITY", "razao": "NTSEC SOLUCOES EM TELEINFORMATICA LTDA", "cnpj": "09.137.728/0002-15", "segmento": "Tecnologia", "subsegmento": "Cibersegurança", "csm": "Jonathan", "plano": "Avançado (PLIQ) - Mensal", "mrr": 299.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 39, "empresa": "PRIVACY TOOLS", "razao": "PRIVACY TOOLS CONSULTORIA EM TECNOLOGIA LTDA", "cnpj": "33.468.050/0001-57", "segmento": "Tecnologia", "subsegmento": "Privacidade/LGPD", "csm": "Jonathan", "plano": "Intermediário (PLIQ) - Mensal", "mrr": 299.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 40, "empresa": "FRIGORIFICO BROERING", "razao": "FRIGORIFICO BROERING LTDA", "cnpj": "82.739.038/0001-45", "segmento": "Alimenticio", "subsegmento": "Frigorífico", "csm": "Jonathan", "plano": "Intermediário (PLIQ) - Mensal", "mrr": 299.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 41, "empresa": "AUDE LTDA", "razao": "LONGEVIDADE SAUDAVEL EDUCACAO & SERVICOS PARA SAUDE LTDA", "cnpj": "09.038.724/0001-07", "segmento": "Saúde", "subsegmento": "Longevidade", "csm": "Jonathan", "plano": "Advanced (PLIQ) - Mensal", "mrr": 333.33, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 42, "empresa": "MORAR CONSTRUTORA", "razao": "MORAR CONSTRUTORA E INCORPORADORA LTDA", "cnpj": "27.318.674/0001-95", "segmento": "Imobiliário", "subsegmento": "Construtura", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 1697.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 43, "empresa": "100% Eventos", "razao": "100 POR CENTO EVENTOS LTDA", "cnpj": "", "segmento": "Eventos", "subsegmento": "Produção Eventos", "csm": "Jonathan", "plano": "Pro 2025 (PLIQ) - Mensal", "mrr": 797.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 44, "empresa": "DTEL", "razao": "DTEL TELECOM LTDA", "cnpj": "09.376.370/0001-00", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise 2025 (PLIQ) - Mensal", "mrr": 2177.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 45, "empresa": "CETRO PARK", "razao": "MONTE SIAO ESTACIONAMENTO LTDA", "cnpj": "06.317.845/0001-91", "segmento": "Serviços", "subsegmento": "Estacionamentos", "csm": "Jonathan", "plano": "Advanced (PLIQ) - Mensal", "mrr": 397.0, "renovacao": "2026-05-15", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 46, "empresa": "CARMEHIL", "razao": "CARMEHIL - COMERCIAL ELETRICA LTDA", "cnpj": "02.403.486/0001-34", "segmento": "Varejo", "subsegmento": "Atacado", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 526.6, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 47, "empresa": "SEBRAE MS", "razao": "SERVICO DE APOIO AS MICRO E PEQU EMPR DE MS SEBRAE MS", "cnpj": "15.419.591/0001-03", "segmento": "Educação", "subsegmento": "Terceiro Setor", "csm": "Jonathan", "plano": "Enterprise 2025 (PLIQ) - Mensal", "mrr": 4499.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 48, "empresa": "POWER TELECOM", "razao": "POWER TELECOMUNICACOES LTDA", "cnpj": "07.802.639/0001-30", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro 2025 (PLIQ) - Mensal", "mrr": 1597.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 49, "empresa": "INFORNET", "razao": "INFINET SERVICO DE COMUNICACAO MULTIMIDIA LTDA", "cnpj": "12.191.875/0001-05", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Enterprise 2025 (PLIQ) - Mensal", "mrr": 2397.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 50, "empresa": "FHC FIBRA", "razao": "FHC FIBRA TECNOLOGIA LTDA", "cnpj": "45.272.581/0001-59", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro 2025 (PLIQ) - Mensal", "mrr": 837.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 51, "empresa": "NWI TELECOM", "razao": "NETWORLD TELECOMUNICACOES DO BRASIL LTDA", "cnpj": "00.545.482/0001-65", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 897.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 52, "empresa": "CARDAN SERVICOS", "razao": "SOUZA E MOREIRA SERVICOS LTDA", "cnpj": "26.069.057/0001-30", "segmento": "Serviço", "subsegmento": "Manutenção", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 697.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 53, "empresa": "MASSA TELECOM", "razao": "MASSA TELECOMUNICACOES LTDA.", "cnpj": "47.701.625/0001-44", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 497.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 54, "empresa": "Um", "razao": "RM TELECOM LTDA", "cnpj": "45.462.572/0001-20", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Jonathan", "plano": "Pro 2025 (PLIQ) - Mensal", "mrr": 697.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 55, "empresa": "UNIMED DE FORTALEZA", "razao": "UNIMED FORTALEZA SOCIEDADE COOPERATIVA MEDICA LTDA", "cnpj": "05.868.278/0004-41", "segmento": "Saúde", "subsegmento": "Plano de Saúde", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 4167.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 56, "empresa": "Adeste", "razao": "ADESTE PRODUTOS ANIMAIS E VEGETAIS LTDA", "cnpj": "", "segmento": "Indústria", "subsegmento": "Agro", "csm": "Jonathan", "plano": "Pro (PLIQ) - Mensal", "mrr": 620.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 57, "empresa": "SAFEWEB SEGURANCA DA INFORMACAO LTDA.", "razao": "SAFEWEB SEGURANCA DA INFORMACAO LTDA.", "cnpj": "", "segmento": "Tecnologia", "subsegmento": "Segurança", "csm": "Jonathan", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 2570.5, "renovacao": "2026-04-15", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 58, "empresa": "APOSTA GANHA", "razao": "APOSTA GANHA LOTERIAS LTDA", "cnpj": "56.001.749/0001-08", "segmento": "Entretenimento", "subsegmento": "Apostas", "csm": "Iara", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 4000.1, "renovacao": "2026-06-10", "status": "Onboarding", "risco": "Baixo", "onboarding": "Implementação", "prox_followup": "2026-03-15", "obs": "", "health": 65, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 59, "empresa": "MHNET", "razao": "MHNET TELECOMUNICACOES LTDA", "cnpj": "05.245.502/0001-04", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Iara", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 8449.25, "renovacao": "2026-11-21", "status": "Onboarding", "risco": "Baixo", "onboarding": "Implementação", "prox_followup": "2026-03-05", "obs": "", "health": 65, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 60, "empresa": "Ceres Investimentos", "razao": "CERES INVESTIMENTOS E CONSULTORIA LTDA", "cnpj": "34.250.750/0001-33", "segmento": "Financeiro", "subsegmento": "Investimentos", "csm": "Iara", "plano": "Pro (PLIQ) - Mensal", "mrr": 627.87, "renovacao": "2026-10-10", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "2026-03-05", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 61, "empresa": "Cendro", "razao": "CENDRO - CENTRO DE DOCUMENTACAO E RADIOLOGIA ODONTOLOGICA LTDA", "cnpj": "02.962.103/0001-68", "segmento": "Saúde", "subsegmento": "Odonto", "csm": "Iara", "plano": "Advanced (PLIQ) - Mensal", "mrr": 663.62, "renovacao": "2026-10-10", "status": "Churn", "risco": "Crítico", "onboarding": "Não Iniciado", "prox_followup": "2026-03-02", "obs": "", "health": 15, "health_status": "critico", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 62, "empresa": "Incentivas Mais", "razao": "INCENTIVA VENDAS E TREINAMENTOS LTDA", "cnpj": "28.470.928/0001-59", "segmento": "Treinamento", "subsegmento": "Vendas", "csm": "Iara", "plano": "Light (PLIQ) - Mensal", "mrr": 99.0, "renovacao": "", "status": "Em Risco", "risco": "Alto", "onboarding": "Concluído", "prox_followup": "2026-03-02", "obs": "", "health": 48, "health_status": "risco", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 63, "empresa": "LinQ telecom", "razao": "LINQ TELECOMUNICACOES LTDA", "cnpj": "26.329.734/0001-02", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Iara", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 4400.0, "renovacao": "2026-07-14", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 64, "empresa": "Cartório Fabiana Faro", "razao": "Fabiana Faro de Souza Campos Teixeira", "cnpj": "30.861.271/807", "segmento": "Serviços", "subsegmento": "Cartório", "csm": "Iara", "plano": "Varejo (PLIQ) - Mensal", "mrr": 208.0, "renovacao": "", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": ["cnpj_cpf"]}, {"id": 65, "empresa": "Conect Telecom", "razao": "VALDEMAR MELO DA MOTA & CIA LTDA", "cnpj": "07.353.979/0001-20", "segmento": "Telecomunicação", "subsegmento": "Telecom", "csm": "Iara", "plano": "Enterprise (PLIQ) - Mensal", "mrr": 1031.33, "renovacao": "2026-12-20", "status": "Ativo", "risco": "Baixo", "onboarding": "Concluído", "prox_followup": "", "obs": "", "health": 78, "health_status": "saudavel", "contato": "", "email": "", "telefone": "", "flags": []}, {"id": 66, "empresa": "Cefalo X", "razao": "CEFALO-X DIAGNOSTICO POR IMAGEM EM ODONTOLOGIA SOCIEDADE LIMITADA", "cnpj": "02.727.122/0001-00", "segmento": "Saúde", "subsegmento": "Odonto", "csm": "Iara", "plano": "Basic (PLIQ) - Mensal", "mrr": 312.8, "renovacao": "2026-07-20", "status": "Ativo", "risco": "Baixo",
